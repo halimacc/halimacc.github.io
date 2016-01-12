@@ -73,3 +73,7 @@ deploy:
   type: git
   repo: https://github.com/halimacc/halimacc.github.io
   branch: master
+
+# Sitemap
+sitemap:
+    path: sitemap.xml
