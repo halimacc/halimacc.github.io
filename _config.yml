@@ -3,11 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 冲冲的生命周期
-subtitle: 这到底是为什么呢= =
+title: Lifecycle of a Programmer
+subtitle: 
 description:
 author: Chong
-language: zh-Hans
+language: en
 timezone:
 
 # URL
