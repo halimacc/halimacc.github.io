@@ -1,9 +1,10 @@
 title: "about"
 date: 2015-12-29 22:04:10
 ---
-何冲的个人简介
+Chong He
 =====
-- - -
-喜欢电影、小说、健身、图形学和Ukelele的一个人。
-目前就读与上海交通大学的数字艺术实验室，主攻方向是头发动画模拟。
-
+* He is now a Master candidate at Digital Art Lab, SJTU.
+* He develops with anything needed.
+* He just started a project on Projection Mapping.
+* He has a cat.
+* He loves films.
