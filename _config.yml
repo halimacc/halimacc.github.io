@@ -71,7 +71,7 @@ stylus:
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/halimacc/halimacc.github.io
+  repo: git@github.com:halimacc/halimacc.github.io.git
   branch: master
 
 # Sitemap
