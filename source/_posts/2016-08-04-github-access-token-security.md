@@ -7,7 +7,7 @@ By accident (dangerous action) I found out an interesting fact that ** your Gith
 
 I tested it few more times and found more details:
 - Access token will be immediately revoked after the push of a commit that contains the explicit text.
-- Access token will be revoked whatever public repo the explicit text was in or whoever committed it (private repo has not been tested).
+- Access token will be revoked whatever public repo the explicit text was in or whoever committed it (Updated: private repo won't, thanks for help from Rong and Yanzhe:)).
 - The match of access token is explicit as a string starts/ends with EOF or space or brackets. For example, assume you have an access token ABC:
 	* "ABC" will be detected.
 	* "xABCx" will not.
