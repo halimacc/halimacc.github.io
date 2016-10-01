@@ -1,0 +1,690 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Chong" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="With a Kinect and a projector, it’s easy for one to build a simple SAR(Space Argumented Reality) program like above. To get start, an essential step is to calibrate the Kinect and projector. 
+Kinect2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kinect2 and Projector Calibration with Enhancement">
+<meta property="og:url" content="http://halimacc.github.io/p/kinect2-projector-calib/index.html">
+<meta property="og:site_name" content="Lifecycle of a Programmer">
+<meta property="og:description" content="With a Kinect and a projector, it’s easy for one to build a simple SAR(Space Argumented Reality) program like above. To get start, an essential step is to calibrate the Kinect and projector. 
+Kinect2">
+<meta property="og:image" content="http://7xqh47.com1.z0.glb.clouddn.com/kinect2-projector-calib/ar.png">
+<meta property="og:image" content="http://7xqh47.com1.z0.glb.clouddn.com/kinect2-projector-calib/flicker.png">
+<meta property="og:updated_time" content="2016-10-01T15:29:53.416Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kinect2 and Projector Calibration with Enhancement">
+<meta name="twitter:description" content="With a Kinect and a projector, it’s easy for one to build a simple SAR(Space Argumented Reality) program like above. To get start, an essential step is to calibrate the Kinect and projector. 
+Kinect2">
+<meta name="twitter:image" content="http://7xqh47.com1.z0.glb.clouddn.com/kinect2-projector-calib/ar.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://halimacc.github.io/p/kinect2-projector-calib/"/>
+
+  <title> Kinect2 and Projector Calibration with Enhancement | Lifecycle of a Programmer </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-72328428-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?5f0d1b7518f6af4440e472de4385ab22";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Lifecycle of a Programmer</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Kinect2 and Projector Calibration with Enhancement
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-09-29T22:57:56+08:00" content="2016-09-29">
+              2016-09-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Calibration/" itemprop="url" rel="index">
+                    <span itemprop="name">Calibration</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/p/kinect2-projector-calib/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="p/kinect2-projector-calib/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://7xqh47.com1.z0.glb.clouddn.com/kinect2-projector-calib/ar.png" alt="AR"></p>
+<p>With a Kinect and a projector, it’s easy for one to build a simple SAR(Space Argumented Reality) program like <a href="https://www.youtube.com/watch?v=FnulH8TrZVo" target="_blank" rel="external">above</a>. To get start, an essential step is to calibrate the Kinect and projector. </p>
+<h2 id="Kinect2-Projector-Calication-Tool"><a href="#Kinect2-Projector-Calication-Tool" class="headerlink" title="Kinect2 Projector Calication Tool"></a>Kinect2 Projector Calication Tool</h2><p><a href="http://www.genekogan.com/works/kinect-projector-toolkit.html" target="_blank" rel="external">KinectProjectorToolkit</a> is a Processing project that could calibrate a projector to a Kinect depth camera, I’ve migrated it to Kinect2 and you can visit <a href="https://github.com/halimacc/Kinect2ProjectorCalibration" target="_blank" rel="external"><strong>Kinect2ProjectorCalibration</strong></a> and use it to calibrate your Kinect2 depth camera and projector.</p>
+<p>To give myself some credit, I have to say it’s not easy to find such a project and migrate to Kinect2 among many Kinect/camera projector calibration projects due to</p>
+<ul>
+<li><strong>Interactivity</strong>: the size of Kinect2’s color stream has increased to 1920x1080, this rules out many projects that need finding chessboard in realtime video stream.</li>
+</ul>
+<p>and</p>
+<ul>
+<li><strong>Compatibiliy</strong>: most of calibration projects are <code>openframeworks</code> project, while there’s no Kinect2 library that satisfies the interface as Kinect libraries provide in these projects.</li>
+</ul>
+<h2 id="Accuracy-Improvement"><a href="#Accuracy-Improvement" class="headerlink" title="Accuracy Improvement"></a>Accuracy Improvement</h2><p>Useful and convenient the project is, however, the calibration result can sometimes be very inaccurate, a main cause is the <strong>pixel flicker</strong> comes from hardware error. To address this problem, two methods have been taken to improve the stability of image.</p>
+<p>A pixel flicker example:</p>
+<p><img src="http://7xqh47.com1.z0.glb.clouddn.com/kinect2-projector-calib/flicker.png" alt="flicker"></p>
+<h4 id="Averaged-Image-Frame"><a href="#Averaged-Image-Frame" class="headerlink" title="Averaged Image Frame"></a>Averaged Image Frame</h4><p>Leveraging the fact that</p>
+<ol>
+<li>the scene in a calibration is completely static</li>
+<li>the pixel flicker is random</li>
+</ol>
+<p>we can assume that the average image of sufficient number of frames is very close to the groundtruth image. So I used an averaged image of many sequentials frame as the final image used to calibration in the project, you can set <code>cacheLen</code> to an appropriate value during calibration (appr. 30~60).</p>
+<h4 id="Bilinear-Interpolation-on-Registered-Image"><a href="#Bilinear-Interpolation-on-Registered-Image" class="headerlink" title="Bilinear Interpolation on Registered Image"></a>Bilinear Interpolation on Registered Image</h4><p>The Kinect2ProjectorCalibration project detects chessborad pattern in a <strong>registered</strong> image (which is a depth image with color pixel mapped on it), the mapping relation given by the Kinect2 interface is a pair of <strong>float</strong> <code>(Xcolor, Ycolor)</code> for each pixel on depth image. Use a better interpolation algorithm while mapping color pixel to depth pixel can ease the flicker of the float value. Here I use bilinear interpolation in the project (cubic interpolation is too slow for realtime image stream).</p>
+<p>With above two enhancement, a better calibration result can be achieved.</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://github.com/yty/yty.github.io/issues/4" target="_blank" rel="external">矫正kinect深度相机与其它图像摄像机以及投影机的空间关系</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/p/github-access-token-security/" rel="next" title="Github Access Token Automatically Revoked If Exposed">
+                <i class="fa fa-chevron-left"></i> Github Access Token Automatically Revoked If Exposed
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Chong" />
+          <p class="site-author-name" itemprop="name">Chong</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/halimacc" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/2297099400" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Kinect2-Projector-Calication-Tool"><span class="nav-number">1.</span> <span class="nav-text">Kinect2 Projector Calication Tool</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Accuracy-Improvement"><span class="nav-number">2.</span> <span class="nav-text">Accuracy Improvement</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Averaged-Image-Frame"><span class="nav-number">2.0.1.</span> <span class="nav-text">Averaged Image Frame</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Bilinear-Interpolation-on-Registered-Image"><span class="nav-number">2.0.2.</span> <span class="nav-text">Bilinear Interpolation on Registered Image</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Chong</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'loap';
+      var disqus_identifier = 'p/kinect2-projector-calib/';
+      var disqus_title = "Kinect2 and Projector Calibration with Enhancement";
+      var disqus_url = 'http://halimacc.github.io/p/kinect2-projector-calib/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
