@@ -3,7 +3,7 @@ date: 2016-09-29 22:57:56
 categories:
 	Calibration
 ---
-![AR](http://7xqh47.com1.z0.glb.clouddn.com/kinect2-project-calib/ar.png)
+![AR](http://7xqh47.com1.z0.glb.clouddn.com/kinect2-projector-calib/ar.png)
 
 With a Kinect and a projector, it's easy for one to build a simple SAR(Space Argumented Reality) program like [above](https://www.youtube.com/watch?v=FnulH8TrZVo). To get start, an essential step is to calibrate the Kinect and projector. 
 
@@ -25,22 +25,24 @@ Accuracy Improvement
 --------------------
 Useful and convenient the project is, however, the calibration result can sometimes be very inaccurate, a main cause is the **pixel flicker** comes from hardware error. To address this problem, two methods have been taken to improve the stability of image.
 
+A pixel flicker example:
+
+![flicker](http://7xqh47.com1.z0.glb.clouddn.com/kinect2-projector-calib/flicker.png)
+
 #### Averaged Image Frame
 
-Leveraging the fact that 1) the scene in a calibration is completely static, and 2) the pixel flicker is random, we can assume that the average image of sufficient number of frames is very close to the groundtruth image. So I used an averaged image of many sequentials frame as the final image used to calibration in the project.
+Leveraging the fact that
+1. the scene in a calibration is completely static
+2. the pixel flicker is random
 
+we can assume that the average image of sufficient number of frames is very close to the groundtruth image. So I used an averaged image of many sequentials frame as the final image used to calibration in the project, you can set `cacheLen` to an appropriate value during calibration (appr. 30~60).
 
-#### Bilinear interpolation on registered image
+#### Bilinear Interpolation on Registered Image
 
-The Kinect2ProjectorCalibration project detect chessborad pattern in a **registered** image (which is a depth image with color pixel mapped on it), 
+The Kinect2ProjectorCalibration project detects chessborad pattern in a **registered** image (which is a depth image with color pixel mapped on it), the mapping relation given by the Kinect2 interface is a pair of **float** `(Xcolor, Ycolor)` for each pixel on depth image. Use a better interpolation algorithm while mapping color pixel to depth pixel can ease the flicker of the float value. Here I use bilinear interpolation in the project (cubic interpolation is too slow for realtime image stream).
 
-
+With above two enhancement, a better calibration result can be achieved.
 
 Reference
 ---------
 [矫正kinect深度相机与其它图像摄像机以及投影机的空间关系](https://github.com/yty/yty.github.io/issues/4)
-
-
-
-
-
